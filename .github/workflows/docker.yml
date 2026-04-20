@@ -1,6 +1,9 @@
 name: Docker Build and Publish
 
 on:
+  push:
+    tags:
+      - "v*.*.*"
   workflow_dispatch:
     inputs:
       docker_image_name:
@@ -58,4 +61,5 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Image digest
-        run: echo "Image built successfully with tags: ${{ steps.meta.outputs.tags }}"
+        run: |
+          echo "Image built successfully with tags: ${{ steps.meta.outputs.tags }}"
